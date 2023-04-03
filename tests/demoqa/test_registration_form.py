@@ -6,28 +6,18 @@ from selenium.webdriver.chrome.options import Options
 
 from utils import attach
 
+# browser.open("https://demoqa.com/automation-practice-form")
 
 @allure.title("Successful fill form")
 def test_successful():
-    options = Options()
-    selenoid_capabilities = {
-        "browserName": "chrome",
-        "browserVersion": "100.0",
-        "selenoid:options": {"enableVNC": True, "enableVideo": False},
-    }
-    options.capabilities.update(selenoid_capabilities)
-    driver = webdriver.Remote(
-        command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
-        options=options,
-    )
-
-    browser.config.driver = driver
-
     first_name = "Alex"
     last_name = "Egorov"
 
+
+
+
     with allure.step("Open registrations form"):
-        browser.open("https://demoqa.com/automation-practice-form")
+        # browser.open("https://demoqa.com/automation-practice-form")
         browser.element(".practice-form-wrapper").should(
             have.text("Student Registration Form")
         )
@@ -63,6 +53,9 @@ def test_successful():
         #     have.texts(first_name, last_name, "alex@egorov.com", "Some street 1"))
 
 
-# attach.add_html(browser)
-# attach.add_screenshot(browser)
+attach.add_screenshot(browser)
 # attach.add_logs(browser)
+# attach.add_html(browser)
+
+def add_video(browser):
+    video_url ='https://selenoid/autotests.cloud/video' + browser.driver.session_id +'.mp4'
